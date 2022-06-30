@@ -10,7 +10,6 @@ name: build
       ros_version:
         description: RouterOS Version
         required: true
-        default: "latest"
 
 env:
   TEST_TAG: routerostest
