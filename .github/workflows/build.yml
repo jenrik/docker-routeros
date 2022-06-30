@@ -4,7 +4,7 @@ name: build
 "on":
   push:
     branches: [master]
-
+  pull_request:
   workflow_dispatch:
     inputs:
       ros_version:
