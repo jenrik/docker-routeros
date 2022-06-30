@@ -55,6 +55,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          tags: ghcr.io/${{ github.repository }}
+          tags: ghcr.io/${{ github.repository }}:${{ inputs.ros_version || env.DEFAULT_VERSION }}
           push: true
           build-args: ROUTEROS_VERSION=${{ inputs.ros_version || env.DEFAULT_VERSION }}
