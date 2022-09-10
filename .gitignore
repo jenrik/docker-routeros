@@ -1,3 +1,4 @@
 /.idea/
 /*.vdi
 /docker-compose.yml
+/.github/node_modules

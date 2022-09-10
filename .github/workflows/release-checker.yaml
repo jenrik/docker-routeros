@@ -1,0 +1,29 @@
+name: Check for new RouterOS releases
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 2 * * *'
+
+permissions:
+  actions: write
+  packages: read
+
+jobs:
+  action-scripts:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "./.github"
+    steps:
+      - uses: actions/setup-node@v3
+
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check for new releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node ./release-checker.mjs
