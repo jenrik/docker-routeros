@@ -15,6 +15,17 @@ var rssFeeds = [
 	"https://mikrotik.com/development.rss", // all
 ];
 
+var brokenVersions = [
+  "6.49.7",
+  "7.6",
+  "7.6rc3",
+  "7.7beta3",
+  "7.7beta4",
+  "7.7beta6",
+  "7.7beta8",
+  "7.7beta9",
+];
+
 // Check existing images in ghcr.io
 var ghcrAuth = Buffer.from(GITHUB_TOKEN).toString('base64')
 var tagsResp = await axios.get(
@@ -44,6 +55,7 @@ var missingVersions = results
   .flat() // Flatten versions list for each RSS feed
   .filter((v, i, a) => a.indexOf(v) === i) // Remove duplicates
   .filter((v, i, a) => existingVersions.indexOf(v) == -1) // Filter for versions that are missing a container image
+  .filter((v, i, a) => brokenVersions.indexOf(v) == -1) // Filter versions that fails to build
 
 console.log("missing versions: " + missingVersions.join(", "))
 
